@@ -1,8 +1,10 @@
 ﻿using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace DataAccess.Concrete.InMemory
@@ -31,15 +33,7 @@ namespace DataAccess.Concrete.InMemory
         {
             //LİNQ -----> Language Integrated Query
             //Lambda
-
-            //Product productToDelete =
-            //foreach (var p in _products)
-            //{
-            //    if (product.ProductId == p.ProductId)
-            //    {
-            //        _ = productToDelete == p;
-            //    }
-            //}                           //firstordefault,first
+                          //firstordefault,first
            Product productToDelete = _products.SingleOrDefault(p=>p.ProductId == product.ProductId);//foreach döngüsünü kullanamamak için böyle kısaltabiliyoruz.
                                                //bu bir methottur
 
@@ -65,5 +59,19 @@ namespace DataAccess.Concrete.InMemory
         {
            return _products.Where(p => p.CategoryId == categoryId).ToList();
         }
+
+        public List<Product> GetAll(Expression<Func<Product, bool>> filter = null)
+        {
+            using (NorthwindContext context = new NorthwindContext())
+            {
+                return filter == null ? context.Set<Product>().ToList() : context.Set<Product>().Where(filter).ToList();
+            }
+        }
+
+        public Product Get(Expression<Func<Product, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+       
     }
 }
