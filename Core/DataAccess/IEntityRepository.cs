@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Core.DataAccess
 {
-    //generic counstrait 
+    //generic counstrait
     //class : referans tip
     //IEntity :IEntity olabilir veya IEntity implemente eden bir nesne olabilir.
     public interface IEntityRepository<T> where T:class,IEntity,new()

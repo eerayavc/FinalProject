@@ -12,6 +12,7 @@ using System.Text;
 namespace DataAccess.Concrete.EntityFramework
 {
     //NuGet
+    //Dal gördüğümüz zaman veri erişim katmanı -- entity = product
     public class EfProductDal : EfEntityRepositoryBase<Product, NorthwindContext>, IProductDal
     {
         public List<ProductDetailDto> GetProductDetails()
